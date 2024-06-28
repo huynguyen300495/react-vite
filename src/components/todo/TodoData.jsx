@@ -16,8 +16,6 @@ const TodoData = (props) => {
                     )
                 })
             }
-          
-            
         </div>
     )
 }
