@@ -15,14 +15,19 @@ const UserForm = () => {
 
     const handleCreateButton = async () => {
         const res = await createUserAPI(fullName, email, password, phoneNumber)
+        
         if(res.data){
             notification.success({
-                message: "create user",
+                message: "Create user",
                 description: "Successful "
+            })
+        }else{
+            notification.error({
+                message: "Error create user",
+                description: JSON.stringify(res.message)
             })
         }
         
-        console.log(res.data.data)
     }
     return(
         <div className="user-form" style={{margin: "20px 0"}}>
