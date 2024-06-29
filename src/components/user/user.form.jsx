@@ -6,12 +6,13 @@ import { useState } from 'react';
 import { createUserAPI } from '../../services/api.service';
 
 
-const UserForm = () => {
+const UserForm = (props) => {
 
     const [fullName, setFullName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("")
+    const {loadUser} = props
 
     const handleSubmitButton = async () => {
 
@@ -22,7 +23,8 @@ const UserForm = () => {
                 message: "Create user",
                 description: "Successful "
             })
-            setIsModalOpen(false)
+            resetAndCloseModal()
+            await loadUser()
         }else{
             notification.error({
                 message: "Error create user",
@@ -33,6 +35,14 @@ const UserForm = () => {
 
   
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const resetAndCloseModal = () => {
+        setIsModalOpen(false)
+        setFullName("")
+        setPassword("")
+        setEmail("")
+        setPhoneNumber("")
+    }
 
     return(
         <div className="user-form" style={{margin: "20px 0"}}>
@@ -45,7 +55,7 @@ const UserForm = () => {
                 <Modal title="Create User" 
                 open={isModalOpen} 
                 onOk={() => {handleSubmitButton()} }  
-                onCancel={() => {setIsModalOpen(false)}}
+                onCancel={() => {resetAndCloseModal()}}
                 maskClosable = {false}
                 okText= {"CREATE"}
                 >
@@ -53,7 +63,7 @@ const UserForm = () => {
                     <div>
                         <span>FullName</span>
                         <Input 
-                        //value={fullName}
+                        value={fullName}
                         onChange={(event) => {setFullName(event.target.value)}}
                         />
                     </div>
