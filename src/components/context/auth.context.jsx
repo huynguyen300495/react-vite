@@ -22,8 +22,10 @@ import { createContext, useState } from "react";
         id: "",
     })
 
+    const [isAppLoading, setIsAppLoading] = useState(true)
+
     return(
-        <AuthContext.Provider value={{user, setUser}}>
+        <AuthContext.Provider value={{user, setUser,isAppLoading, setIsAppLoading}}>
             {props.children}
         </AuthContext.Provider>
 
