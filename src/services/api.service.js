@@ -81,7 +81,7 @@ const loginAPI = (username, password) => {
     const data = {
         username: username,
         password: password,
-        delay: 5000
+        delay: 2000
     }
     return axios.post(URL_BACKEND, data)
 
